@@ -17,7 +17,8 @@
         <!-- Header -->
         <header class="flex justify-between items-center flex-wrap gap-2 mb-2">
             <div class="logo-group flex items-center gap-2">
-                <div class="bg-yellow-500 text-black p-1.5 font-black rounded-lg text-sm">P</div>
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="PalavaSpace Logo"
+                    class="w-10 h-10 object-contain">
                 <div>
                     <h1 class="main-title italic">PALAVA<span class="text-yellow">SPACE</span></h1>
                     <p class="uppercase tracking-widest text-[10px] text-zinc-500">Room: {{ room_id }}</p>
