@@ -110,6 +110,29 @@ def start_background_tasks():
     t = threading.Thread(target=thread_wrapper, daemon=True)
     t.start()
 
+@app.route("/api/tick/<room_id>", methods=["POST"])
+def tick_endpoint(room_id):
+    """
+    Endpoint for clients to trigger the AI loop (Serverless workaround).
+    """
+    room = room_manager.get_or_create_room(room_id)
+    
+    # Run the async tick logic in a sync wrapper
+    async def run_tick():
+        await orchestrator.process_tick(room)
+        
+    # Create a new event loop for this thread/request 
+    # (Flask runs in threads, usually needs new loop for async)
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(run_tick())
+        loop.close()
+        return {"status": "ok", "action": "tick_processed"}, 200
+    except Exception as e:
+        print(f"Tick Error: {e}")
+        return {"status": "error", "message": str(e)}, 500
+
 if __name__ == "__main__":
     print("--- 🚀 STARTING PALAVASPACE SERVER ---")
     start_background_tasks()

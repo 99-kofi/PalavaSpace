@@ -83,4 +83,39 @@ class Orchestrator:
                     if next_agent:
                         await room.trigger_agent_response(next_agent)
 
+        if not room.active_users:
+            print(f"Room [{self.room_id}]: No active users. Skipping AI turn.")
+            return
+
+    async def process_tick(self, room: Room):
+        """
+        Serverless-friendly 'tick' capability. 
+        Called periodically by an external trigger (or client poll).
+        """
+        # Ensure room has agents (handling cold starts)
+        if not room.active_agents:
+            # Re-add default personas if missing
+            from ai.personas import PERSONAS
+            default_personas = ["area_chairman", "campus_big_boy", "auntie_akos", "kojo_streets"]
+            for p_id in default_personas:
+                if p_id in PERSONAS:
+                    room.active_agents.append(PERSONAS[p_id])
+            print(f"Orchestrator [{room.room_id}]: Re-populated agents for serverless tick.")
+
+        # Logic to decide if we should generate a message
+        # In a real persistent loop, we'd sleep. Here we just roll the dice.
+        # Assuming tick is called every ~5 seconds.
+        
+        # 40% chance to speak per tick
+        if random.random() < 0.4:
+            print(f"Orchestrator [{room.room_id}]: Tick triggered response generation.")
+            next_agent = await self.decide_next_speaker(room)
+            if next_agent:
+                # We don't await this if we want to return quickly, 
+                # but Vercel might kill the process if we don't. 
+                # So we must await it.
+                await room.trigger_agent_response(next_agent)
+        else:
+            print(f"Orchestrator [{room.room_id}]: Tick processed. No action taken.")
+
 orchestrator = Orchestrator()

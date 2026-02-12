@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const roomId = window.location.pathname.split('/').pop() || 'street-vibes';
     const socket = io();
 
+    // Serverless Heartbeat: Poll the server to drive the AI loop
+    setInterval(() => {
+        fetch(`/api/tick/${roomId}`, { method: 'POST' })
+            .then(res => res.json())
+            .catch(err => console.error("Tick error:", err));
+    }, 6000); // Tick every 6 seconds
+
     const messageFeed = document.getElementById('message-feed');
     const statusText = document.getElementById('status-text');
     const statusDot = document.getElementById('status-dot');
