@@ -1,0 +1,320 @@
+/* PALAVASPACE - V2 Design Tokens */
+:root {
+    --primary-yellow: #facc15;
+    --zinc-900: #18181b;
+    --zinc-800: #27272a;
+    --zinc-700: #3f3f46;
+    --zinc-600: #52525b;
+    --zinc-500: #71717a;
+    --zinc-400: #a1a1aa;
+    --glass-bg: rgba(24, 24, 27, 0.4);
+    --glass-border: rgba(63, 63, 70, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Inter', -apple-system, sans-serif;
+    touch-action: manipulation;
+}
+
+/* App Container - Full Screen */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    /* Dynamic viewport height for mobile */
+    padding: 1rem;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    flex-shrink: 0;
+    padding-bottom: 0.5rem;
+}
+
+/* Main Content Area */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    gap: 0.75rem;
+}
+
+/* Feed Section - Takes remaining space */
+.feed-section {
+    flex: 1;
+    min-height: 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#message-feed {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Sidebar - Collapsible on mobile */
+.sidebar-section {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    max-height: 140px;
+    overflow: visible;
+}
+
+.sidebar-section .card {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Cards */
+.card {
+    background: var(--zinc-900);
+    border: 1px solid var(--zinc-800);
+    border-radius: 1rem;
+    padding: 0.75rem;
+}
+
+/* Mobile specific - stacked header */
+@media (max-width: 640px) {
+    .app-container {
+        padding: 0.5rem;
+    }
+
+    header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .logo-group {
+        flex: 1;
+    }
+
+    .main-title {
+        font-size: 1.25rem !important;
+    }
+
+    .status-group {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .user-profile {
+        padding: 0.25rem 0.5rem !important;
+    }
+
+    .user-profile input {
+        width: 60px !important;
+        font-size: 10px !important;
+    }
+
+    #message-feed {
+        padding: 0.75rem;
+    }
+
+    .msg-bubble {
+        max-width: 95%;
+        padding: 0.75rem;
+    }
+
+    .msg-content {
+        font-size: 0.875rem;
+    }
+
+    .sidebar-section {
+        max-height: 120px;
+    }
+
+    .card-label {
+        font-size: 8px !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    #topic-input {
+        padding: 0.5rem !important;
+        font-size: 12px !important;
+    }
+
+    .emoji-btn {
+        padding: 0.5rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* Tablet and up */
+@media (min-width: 1024px) {
+    .app-container {
+        padding: 1.5rem;
+    }
+
+    main {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .sidebar-section {
+        flex-direction: column;
+        width: 20rem;
+        max-height: none;
+    }
+
+    .sidebar-section .card {
+        flex: none;
+    }
+
+    .feed-section {
+        border-radius: 1.5rem;
+    }
+
+    .card {
+        border-radius: 1.25rem;
+        padding: 1.5rem;
+    }
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/assets/noise.png');
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.main-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.text-yellow {
+    color: var(--primary-yellow);
+}
+
+.chat-msg {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sender-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--zinc-500);
+    margin-bottom: 4px;
+}
+
+.msg-bubble {
+    background: var(--zinc-800);
+    padding: 1rem;
+    border-radius: 1.25rem;
+    border-bottom-left-radius: 0.25rem;
+    max-width: 85%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.msg-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.msg-time {
+    font-size: 0.7rem;
+    color: var(--zinc-600);
+    display: block;
+    margin-top: 4px;
+}
+
+.info-badge {
+    background: var(--zinc-900);
+    color: var(--zinc-500);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    width: fit-content;
+    margin: 1rem auto;
+    border: 1px solid var(--zinc-800);
+}
+
+.emoji-btn {
+    background: var(--zinc-900);
+    border: 1px solid var(--zinc-800);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.emoji-btn:hover,
+.emoji-btn:active {
+    background: var(--zinc-800);
+    transform: scale(1.1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--zinc-700);
+    border-radius: 10px;
+}
+
+/* Hide scrollbar on mobile but keep functionality */
+@media (max-width: 640px) {
+    #message-feed::-webkit-scrollbar {
+        width: 2px;
+    }
+}

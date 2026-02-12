@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PALAVASPACE | Room Arena</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="flex justify-between items-center flex-wrap gap-2 mb-2">
+            <div class="logo-group flex items-center gap-2">
+                <div class="bg-yellow-500 text-black p-1.5 font-black rounded-lg text-sm">P</div>
+                <div>
+                    <h1 class="main-title italic">PALAVA<span class="text-yellow">SPACE</span></h1>
+                    <p class="uppercase tracking-widest text-[10px] text-zinc-500">Room: {{ room_id }}</p>
+                </div>
+            </div>
+            <div class="status-group flex items-center gap-2 flex-wrap">
+                <div
+                    class="user-profile flex items-center gap-1 bg-zinc-900 border border-zinc-800 p-1 px-2 rounded-full">
+                    <span class="text-[8px] uppercase font-black text-zinc-600 hidden sm:inline">Name:</span>
+                    <input type="text" id="username-input" value="Anonymous Paddy"
+                        class="bg-transparent border-none text-[10px] font-bold text-yellow-500 w-20 focus:outline-none">
+                </div>
+                <div class="connection-status flex items-center gap-1">
+                    <span id="status-text" class="text-[10px] uppercase font-bold text-zinc-400">Connecting...</span>
+                    <div id="status-dot" class="w-2 h-2 rounded-full bg-red-500"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Feed Area -->
+            <section class="feed-section">
+                <div id="message-feed" class="space-y-4">
+                    <!-- Messages will be injected here -->
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside class="sidebar-section">
+                <!-- Topic Trigger -->
+                <div class="card">
+                    <h2 class="card-label uppercase tracking-widest text-[10px] text-zinc-600 mb-2 font-black">
+                        🔥 Trigger Topic</h2>
+                    <div class="flex gap-1">
+                        <input type="text" id="topic-input" placeholder="Throw bone..."
+                            class="flex-1 bg-zinc-800 border-none rounded-lg p-2 text-xs min-w-0">
+                        <button onclick="triggerTopic(document.getElementById('topic-input').value)"
+                            class="bg-yellow-500 text-black font-bold px-3 rounded-lg hover:bg-yellow-400 text-sm">Go</button>
+                    </div>
+                </div>
+
+                <!-- Reactions -->
+                <div class="card">
+                    <div class="emoji-grid flex flex-wrap gap-1 justify-center">
+                        <button class="emoji-btn">🔥</button>
+                        <button class="emoji-btn">😂</button>
+                        <button class="emoji-btn">😡</button>
+                        <button class="emoji-btn">💯</button>
+                        <button class="emoji-btn">🙌</button>
+                        <button class="emoji-btn">💀</button>
+                        <button class="emoji-btn">💸</button>
+                        <button class="emoji-btn">🫡</button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/room.js') }}"></script>
+</body>
+
+</html>

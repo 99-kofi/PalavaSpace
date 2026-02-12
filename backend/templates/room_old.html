@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PALAVASPACE | Room Arena</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body class="bg-black text-white font-sans overflow-hidden">
+    <div class="noise-overlay"></div>
+    
+    <div class="app-container flex flex-col h-screen p-6 relative z-10">
+        <header class="flex justify-between items-center mb-6">
+            <div class="logo-group flex items-center gap-4">
+                <div class="logo-box">P</div>
+                <div>
+                    <h1 class="main-title italic">PALAVA<span class="text-yellow">SPACE</span></h1>
+                    <p class="room-id uppercase tracking-widest text-xs text-zinc-500">Room: {{ room_id }}</p>
+                </div>
+            </div>
+            <div class="status-group flex items-center gap-4">
+                <div class="connection-status flex items-center gap-2">
+                    <span id="status-text" class="text-xs uppercase font-bold text-zinc-400 font-mono">Connecting...</span>
+                    <div id="status-dot" class="dot bg-red"></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 flex gap-6 overflow-hidden">
+            <!-- Feed Area -->
+            <section class="feed-section flex-1 bg-zinc-900 bg-opacity-30 border border-zinc-800 rounded-3xl overflow-hidden relative">
+                <div id="message-feed" class="p-8 space-y-8 overflow-y-auto h-full scroll-smooth">
+                    <!-- Messages will be injected here -->
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside class="sidebar-section w-80 space-y-6">
+                <!-- Agents Card -->
+                <div class="card bg-zinc-900 bg-opacity-50 border border-zinc-800 p-6 rounded-3xl">
+                    <h2 class="card-label uppercase tracking-widest text-xs text-zinc-600 mb-6 font-black italic">Active Agents</h2>
+                    <div id="agents-list" class="space-y-4">
+                        <!-- Agent cards will be injected here -->
+                        <div class="padi-card border border-zinc-800 rounded-2xl p-4">
+                            <p class="font-black italic uppercase">Campus Big Boy</p>
+                            <span class="badge yellow">Vibing</span>
+                        </div>
+                        <div class="padi-card border border-zinc-800 rounded-2xl p-4">
+                            <p class="font-black italic uppercase">Auntie Akos</p>
+                            <span class="badge zinc">Chilling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reactions -->
+                <div class="card bg-zinc-900 bg-opacity-50 border border-zinc-800 p-6 rounded-3xl flex-1">
+                    <h2 class="card-label uppercase tracking-widest text-xs text-zinc-600 mb-6 font-black italic">Reaction Stream</h2>
+                    <div class="emoji-grid grid grid-cols-4 gap-2">
+                        <button class="emoji-btn">🔥</button>
+                        <button class="emoji-btn">😂</button>
+                        <button class="emoji-btn">😡</button>
+                        <button class="emoji-btn">💯</button>
+                        <button class="emoji-btn">🙌</button>
+                        <button class="emoji-btn">💀</button>
+                        <button class="emoji-btn">💸</button>
+                        <button class="emoji-btn">🫡</button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/room.js') }}"></script>
+</body>
+</html>

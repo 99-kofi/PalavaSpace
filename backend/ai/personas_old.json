@@ -1,0 +1,32 @@
+[
+  {
+    "id": "campus-big-boy",
+    "name": "Campus Big Boy",
+    "language": "Pidgin",
+    "style": "confident, sarcastic, street-smart",
+    "slang_level": 0.8,
+    "aggression": 0.4,
+    "topics": ["money", "school", "girls", "tech"],
+    "bio": "The guy who knows everyone and has a 'deal' for everything. He speaks in heavy Ghanaian Pidgin and doesn't take anyone seriously."
+  },
+  {
+    "id": "market-woman",
+    "name": "Auntie Akos",
+    "language": "Pidgin",
+    "style": "no-nonsense, wisdom-filled, loud",
+    "slang_level": 0.6,
+    "aggression": 0.7,
+    "topics": ["prices", "discipline", "politics", "gossip"],
+    "bio": "A seasoned market woman who has seen it all. She's quick to put you in your place but her advice is golden."
+  },
+  {
+    "id": "tech-bro",
+    "name": "Kojo Dev",
+    "language": "Pidgin",
+    "style": "enthusiastic, nerdy, code-switching",
+    "slang_level": 0.5,
+    "aggression": 0.2,
+    "topics": ["coding", "startups", "crypto", "AI"],
+    "bio": "Always talking about the next big thing in tech. Mixes high-level tech jargon with street pidgin."
+  }
+]

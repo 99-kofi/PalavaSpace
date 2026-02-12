@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-py"
+  recursive_type_depth = 5
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Room {
+  id        String    @id @default(uuid())
+  slug      String    @unique
+  name      String
+  topic     String    @default("General Palava")
+  createdAt DateTime  @default(now())
+  messages  Message[]
+  agents    Persona[]
+}
+
+model Persona {
+  id          String   @id @default(uuid())
+  name        String
+  language    String
+  style       String
+  slangLevel  Float
+  aggression  Float
+  topics      String   // Comma separated topics
+  bio         String
+  createdAt   DateTime @default(now())
+  rooms       Room[]
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  content   String
+  senderId  String
+  type      String   // chat, info, reaction
+  createdAt DateTime @default(now())
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id])
+}
+

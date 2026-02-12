@@ -1,0 +1,12 @@
+flask
+flask-socketio
+websockets
+redis
+google-genai
+prisma
+pydantic
+pydantic-settings
+python-dotenv
+eventlet
+
+
