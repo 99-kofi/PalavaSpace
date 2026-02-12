@@ -115,6 +115,8 @@ main {
 
     .logo-group {
         flex: 1;
+        min-width: 120px;
+        /* Ensure title doesn't crush */
     }
 
     .main-title {
@@ -124,15 +126,18 @@ main {
     .status-group {
         flex-wrap: wrap;
         gap: 0.25rem;
+        justify-content: flex-end;
+        /* Align to right */
     }
 
     .user-profile {
-        padding: 0.25rem 0.5rem !important;
+        padding: 0.25rem 0.75rem !important;
     }
 
     .user-profile input {
-        width: 60px !important;
-        font-size: 10px !important;
+        width: 80px !important;
+        font-size: 16px !important;
+        /* Prevent iOS Zoom */
     }
 
     #message-feed {
@@ -145,26 +150,29 @@ main {
     }
 
     .msg-content {
-        font-size: 0.875rem;
+        font-size: 0.95rem;
     }
 
     .sidebar-section {
-        max-height: 120px;
+        max-height: none;
+        /* remove fixed height constraint */
+        flex-wrap: wrap;
     }
 
     .card-label {
-        font-size: 8px !important;
-        margin-bottom: 0.5rem !important;
+        font-size: 10px !important;
+        margin-bottom: 0.25rem !important;
     }
 
     #topic-input {
         padding: 0.5rem !important;
-        font-size: 12px !important;
+        font-size: 16px !important;
+        /* Prevent iOS Zoom */
     }
 
     .emoji-btn {
-        padding: 0.5rem !important;
-        font-size: 1rem !important;
+        padding: 0.6rem !important;
+        font-size: 1.25rem !important;
     }
 }
 
